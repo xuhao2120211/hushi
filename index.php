@@ -85,7 +85,7 @@
             
             $this->db->close();
         
-            sleep(rand(200, 300));
+            sleep(rand(20, 30));
             
 //            echo json_encode($this->ans);
 //            die;
@@ -132,33 +132,13 @@
         
         public function insertQuestion($ins){
             $all_sel = array_pop($ins);
-            switch ($ins[2]){
-                case 'A':
-                    $ins[] = $all_sel[0];
-                    break;
-                case 'B':
-                    $ins[] = $all_sel[1];
-                    break;
-                case 'C':
-                    $ins[] = $all_sel[2];
-                    break;
-                case 'D':
-                    $ins[] = $all_sel[3];
-                    break;
-                case 'E':
-                    $ins[] = $all_sel[4];
-                    break;
-                case 'F':
-                    $ins[] = $all_sel[5];
-                    break;
-                case 'G':
-                    $ins[] = $all_sel[6];
-                    break;
-                case 'H':
-                    $ins[] = $all_sel[7];
-                    break;
-            }
-            
+			$ans_text = [];
+			
+			foreach(explode(',', $ins[2]) as $v){
+				$sel_key = $this->getSel($v);
+				$ans_text[] = $all_sel[$sel_key];
+			}
+			$ins[] = implode(',', $ans_text);
             
             $sql = "INSERT INTO question (q_id, q_text, q_sel, q_explain, q_sel_text) VALUES ('" . implode("','", $ins) . "')";
     
@@ -187,6 +167,37 @@
             return $ret;
         }
         
+		
+		public function getSel($sel){
+			switch ($sel){
+                case 'A':
+                    $ret = 0;
+                    break;
+                case 'B':
+                    $ret = 1;
+                    break;
+                case 'C':
+                    $ret = 2;
+                    break;
+                case 'D':
+                    $ret = 3;
+                    break;
+                case 'E':
+                    $ret = 4;
+                    break;
+                case 'F':
+                    $ret = 5;
+                    break;
+                case 'G':
+                    $ret = 6;
+                    break;
+                case 'H':
+                    $ret = 7;
+                    break;
+            }
+            
+			return $ret;
+		}
     }
     
     $ob = new getZhushouData();
