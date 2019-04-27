@@ -48,16 +48,24 @@
         public $rand_str = ['A', 'B', 'C', 'D', 'E'];
         
         public function run(){
-            
+            $fen = 900;
             while (true){
                 $this->runOne();
                 sleep(rand(5, 10));
+    
+                $fen += 10;
+                if($fen >= 2000){
+                    die;
+                }
+                
             }
         }
         
     
         public function runOne(){
         
+            
+            
             $end = $this->postCurl($this->url . $this->arg['method'], json_encode($this->arg));
     
             $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
@@ -68,24 +76,27 @@
             
             foreach ($end['data']['user_paper_items'] as $k => $v){
                 $right_answers = $v['qa_item']['right_answers'];
+                
                 if(in_array($k, $mis)){
                     unset($mis[$k]);
-                    $right_answers = $this->rand_str[rand(0, 4)];
+                    $right_answers = $this->rand_str[rand(0, count($v['qa_item']['sel_items']) - 1)];
                 }
+    
+                $right_answers = explode(',', $right_answers);
                 
                 $this->ans['answer'][$v['id']] = [
-                    'sel'      => [$right_answers],
+                    'sel'      => $right_answers,
                     'duration' => 0
                 ];
                 
-                $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['explain'], $v['qa_item']['sel_items']];
+                $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
                 
                 $this->insertQuestion($ins);
             }
             
             $this->db->close();
         
-            sleep(rand(20, 30));
+            sleep(rand(10, 20));
             
 //            echo json_encode($this->ans);
 //            die;
@@ -140,7 +151,7 @@
 			}
 			$ins[] = implode(',', $ans_text);
             
-            $sql = "INSERT INTO question (q_id, q_text, q_sel, q_explain, q_sel_text) VALUES ('" . implode("','", $ins) . "')";
+            $sql = "INSERT INTO question (q_id, q_text, q_sel, q_sel_text) VALUES ('" . implode("','", $ins) . "')";
     
             
             
