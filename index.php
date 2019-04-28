@@ -42,6 +42,21 @@
             "sig"           => "ff63400fed365bcfb640fec057578ae5",
             "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
         ];
+
+        public $top = [
+            "top"           => 32,
+            "range"         => "daily",
+            "order_type"    => "integral",
+            "systemVersion" => "9",
+            "deviceModel"   => "ALP-AL00",
+            "codeVersion"   => "4.0.3",
+            "method"        => "hlzs/integral/rank",
+            "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+            "call_id"       => "e9fadb4e8bff6292ce93011e5147ee35",
+            "apiversion"    => "2.0",
+            "sig"           => "d7ec253ca0130edf57ae85b41dfb702a",
+            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+        ];
         
         public $db;
         
@@ -63,8 +78,6 @@
         
     
         public function runOne(){
-        
-            
             
             $end = $this->postCurl($this->url . $this->arg['method'], json_encode($this->arg));
     
@@ -118,8 +131,12 @@
             curl_setopt($con, CURLOPT_RETURNTRANSFER,true);
             curl_setopt($con, CURLOPT_HTTPHEADER, $this->headers);
             curl_setopt($con, CURLOPT_TIMEOUT,(int)$timeout);
-            
-            return json_decode(curl_exec($con), true);
+
+            $ret = curl_exec($con);
+
+            var_dump($ret);
+
+            return json_decode($ret, true);
         }
         
         public function creatDB(){
@@ -209,7 +226,16 @@
             
 			return $ret;
 		}
+
+		public function getTop(){
+
+            $end = $this->postCurl($this->url . $this->top['method'], json_encode($this->top));
+
+            var_dump($end);
+
+        }
     }
     
     $ob = new getZhushouData();
-    $ob->run();
+//    $ob->run();
+    $ob->getTop();
