@@ -123,9 +123,9 @@
         }
         
         public function creatDB(){
-            $servername = "127.0.0.1";
+            $servername = "cd-cdb-q5l7aqy0.sql.tencentcdb.com:63116";
             $username = "root";
-            $password = "root";
+            $password = "XUhao2120211";
             $dbname = "hushi";
 
             // 创建连接
