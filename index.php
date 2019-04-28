@@ -8,6 +8,7 @@
      */
     class getZhushouData{
         public $url = 'http://www.hulizhushou.com/api/1.0/';
+        public $url_2 = 'http://www.hulizhushou.com/api/2.0/';
         public $headers = [
             "Content-type: application/json;charset='utf-8'",
             "Accept: application/json",
@@ -44,7 +45,7 @@
         ];
 
         public $top = [
-            "top"           => 32,
+            "top"           => 2,
             "range"         => "daily",
             "order_type"    => "integral",
             "systemVersion" => "9",
@@ -63,15 +64,13 @@
         public $rand_str = ['A', 'B', 'C', 'D', 'E'];
         
         public function run(){
-            $fen = 900;
+            
             while (true){
-                $this->runOne();
-                sleep(rand(5, 10));
+                sleep(rand(10, 20));
     
-                $fen += 10;
-                if($fen >= 2000){
-                    die;
-                }
+                if ($this->getTop()) continue;
+                
+                $this->runOne();
                 
             }
         }
@@ -133,9 +132,7 @@
             curl_setopt($con, CURLOPT_TIMEOUT,(int)$timeout);
 
             $ret = curl_exec($con);
-
-            var_dump($ret);
-
+            
             return json_decode($ret, true);
         }
         
@@ -229,13 +226,17 @@
 
 		public function getTop(){
 
-            $end = $this->postCurl($this->url . $this->top['method'], json_encode($this->top));
-
-            var_dump($end);
-
+            $end = $this->postCurl($this->url_2 . $this->top['method'], json_encode($this->top));
+            $data = $end['data']['list'];
+            
+            if ($data[0]['name'] == '吴桐' && $data[0]['integral'] > ($data[1]['integral'] + 100)){
+                return true;
+            }
+            
+            return false;
         }
     }
     
     $ob = new getZhushouData();
-//    $ob->run();
-    $ob->getTop();
+    $ob->run();
+//    $ob->getTop();
