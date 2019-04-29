@@ -7,8 +7,7 @@
      * Time: 19:05
      */
     class getZhushouData{
-        public $url = 'http://www.hulizhushou.com/api/1.0/';
-        public $url_2 = 'http://www.hulizhushou.com/api/2.0/';
+        public $url = 'http://www.hulizhushou.com/api/';
         public $headers = [
             "Content-type: application/json;charset='utf-8'",
             "Accept: application/json",
@@ -17,7 +16,7 @@
     
     
         public $arg = [
-            "project_id"    => "97831",
+            "project_id"    => "107019",//97831
             "paper_id"      => "",
             "systemVersion" => "9",
             "deviceModel"   => "ALP-AL00",
@@ -29,9 +28,10 @@
             "sig"           => "d047e54d6fd0a77220ef61cd4cdf3468",
             "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
         ];
+
         
         public $ans = [
-            "user_paper_id" => "97831-111637-2",
+            "user_paper_id" => "",
             "answer"        => [],
             "systemVersion" => "9",
             "deviceModel"   => "ALP-AL00",
@@ -58,6 +58,20 @@
             "sig"           => "d7ec253ca0130edf57ae85b41dfb702a",
             "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
         ];
+
+        public $andr = [
+            "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+            "call_id"       => "ec5b01a64eaab45953774bdecbddbac2",
+            "sig"           => "ff63400fed365bcfb640fec057578ae5",
+            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+        ];
+
+        public $ios = [
+            "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+            "call_id"       => "65dd88e8392aa7f50c97a427e2e5f0af",
+            "sig"           => "2a755ce9f79f5d5e3a2a75f05610d7df",
+            "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
+        ];
         
         public $db;
         
@@ -78,7 +92,7 @@
     
         public function runOne(){
             
-            $end = $this->postCurl($this->url . $this->arg['method'], json_encode($this->arg));
+            $end = $this->postCurl($this->url . $this->ans['apiversion'] . '/' . $this->arg['method'], json_encode($this->arg));
     
             $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
             
@@ -113,7 +127,7 @@
 //            echo json_encode($this->ans);
 //            die;
             
-            $end = $this->postCurl($this->url . $this->ans['method'], json_encode($this->ans));
+            $end = $this->postCurl($this->url . $this->ans['apiversion'] . '/' . $this->ans['method'], json_encode($this->ans));
         
             return $end;
         }
@@ -226,7 +240,7 @@
 
 		public function getTop(){
 
-            $end = $this->postCurl($this->url_2 . $this->top['method'], json_encode($this->top));
+            $end = $this->postCurl($this->url . $this->top['apiversion'] . '/' . $this->top['method'], json_encode($this->top));
             $data = $end['data']['list'];
             
             if ($data[0]['name'] == '吴桐' && $data[0]['integral'] > ($data[1]['integral'] + 100)){
