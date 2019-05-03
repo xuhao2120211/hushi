@@ -16,7 +16,7 @@
     
     
         public $arg = [
-            "project_id"    => "107019",//97831
+            "project_id"    => "107407",//97831
             "paper_id"      => "",
             "systemVersion" => "9",
             "deviceModel"   => "ALP-AL00",
@@ -60,43 +60,95 @@
         ];
 
         public $andr = [
-            "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-            "call_id"       => "ec5b01a64eaab45953774bdecbddbac2",
-            "sig"           => "ff63400fed365bcfb640fec057578ae5",
-            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+            'arg' => [
+                "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+                "call_id"       => "ec5b01a64eaab45953774bdecbddbac2",
+                "sig"           => "ff63400fed365bcfb640fec057578ae5",
+                "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+            ],
+            'ans' => [
+                "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+                "call_id"       => "ec5b01a64eaab45953774bdecbddbac2",
+                "sig"           => "ff63400fed365bcfb640fec057578ae5",
+                "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+            ],
+            'top' => [
+                "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+                "call_id"       => "e9fadb4e8bff6292ce93011e5147ee35",
+                "sig"           => "d7ec253ca0130edf57ae85b41dfb702a",
+                "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+            ]
         ];
 
         public $ios = [
-            "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-            "call_id"       => "65dd88e8392aa7f50c97a427e2e5f0af",
-            "sig"           => "2a755ce9f79f5d5e3a2a75f05610d7df",
-            "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
+            'arg' => [
+                "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+                "call_id"       => "65dd88e8392aa7f50c97a427e2e5f0af",
+                "sig"           => "2a755ce9f79f5d5e3a2a75f05610d7df",
+                "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
+            ],
+	        'ans' => [
+                "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+                "call_id"       => "14580d0e01e56b4d61fe9a9aca349c00",
+                "sig"           => "0cd55916d83aade3c52d91152181005f",
+                "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
+            ],
+	        'top' => [
+                "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
+                "call_id"       => "12084ee8028d7f9c8075a363e019551d",
+                "sig"           => "d1384263e70235bf75f8312b754b66d8",
+                "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
+            ]
+
+
         ];
         
         public $db;
         
         public $rand_str = ['A', 'B', 'C', 'D', 'E'];
+
+        public $are = [
+            'top' => 'top',
+            'ans' => 'ans',
+            'arg' => 'arg',
+        ];
+
+        public $tag = 'andr';
         
         public function run(){
             
             while (true){
                 sleep(rand(10, 20));
-    
-                if ($this->getTop()) continue;
-                
-                $this->runOne();
+
+                try{
+
+                    if ($this->getTop()){
+                        sleep(300);
+                        continue;
+                    }
+
+                    $this->runOne();
+
+                }catch (Exception $e) {
+
+                    $this->updateToken();
+
+                    echo date('Y-m-d H:i:s', time()) . " 修改token\r\n";
+                    continue;
+
+                }
                 
             }
         }
         
     
         public function runOne(){
-            
+
             $end = $this->postCurl($this->url . $this->ans['apiversion'] . '/' . $this->arg['method'], json_encode($this->arg));
-    
+
             $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
             
-            $this->creatDB();
+//            $this->creatDB();
     
             $mis = $this->getMistake();
             
@@ -115,12 +167,12 @@
                     'duration' => 0
                 ];
                 
-                $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
-                
-                $this->insertQuestion($ins);
+//                $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
+//
+//                $this->insertQuestion($ins);
             }
             
-            $this->db->close();
+//            $this->db->close();
         
             sleep(rand(10, 20));
             
@@ -137,6 +189,12 @@
             if($url == '' || $requestString == '' || $timeout <=0){
                 return false;
             }
+
+
+//            var_dump($url);
+//            var_dump($requestString);
+//            die;
+
             $con = curl_init((string)$url);
             curl_setopt($con, CURLOPT_HEADER, false);
             curl_setopt($con, CURLOPT_POSTFIELDS, $requestString);
@@ -146,6 +204,9 @@
             curl_setopt($con, CURLOPT_TIMEOUT,(int)$timeout);
 
             $ret = curl_exec($con);
+
+//            var_dump($ret);
+//            die;
             
             return json_decode($ret, true);
         }
@@ -241,13 +302,33 @@
 		public function getTop(){
 
             $end = $this->postCurl($this->url . $this->top['apiversion'] . '/' . $this->top['method'], json_encode($this->top));
+
+            if($end['data']['status'] == 'fail'){
+                $this->updateToken();
+                return true;
+            }
+
             $data = $end['data']['list'];
+
+            if(!is_array($data) || count($data) == 0){
+                return true;
+            }
             
             if ($data[0]['name'] == '吴桐' && $data[0]['integral'] > ($data[1]['integral'] + 100)){
                 return true;
             }
             
             return false;
+        }
+
+        public function updateToken(){
+
+            $this->tag = $this->tag == 'andr' ? 'ios' : 'andr';
+            $tag = $this->tag;
+
+            foreach ($this->are as $v){
+                $this->$v = array_merge($this->$v, $this->$tag[$v]);
+            }
         }
     }
     
