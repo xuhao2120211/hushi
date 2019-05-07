@@ -113,7 +113,9 @@
             'arg' => 'arg',
         ];
 
-        public $tag = 'andr';
+        public $tag     = 'andr';
+        public $top_val = 0;
+        public $my_val  = 0;
         
         public function run(){
             
@@ -121,9 +123,16 @@
                 sleep(rand(10, 20));
 
                 try{
-
-                    if ($this->getTop()){
+    
+                    $end = $this->getTop();
+                    
+                    if ($end === 0){
+                        continue;
+                        
+                    } elseif ($end){
+                        
                         sleep(300);
+                        echo date('Y-m-d H:i:s', time()) . " 暂停300秒\r\n";
                         continue;
                     }
 
@@ -180,20 +189,17 @@
 //            die;
             
             $end = $this->postCurl($this->url . $this->ans['apiversion'] . '/' . $this->ans['method'], json_encode($this->ans));
-        
+    
+            $this->my_val += 10;
+            
             return $end;
         }
         
         
         public function postCurl($url,$requestString,$timeout = 5){
-            if($url == '' || $requestString == '' || $timeout <=0){
+            if($url == '' || $requestString == '' || $timeout <= 0){
                 return false;
             }
-
-
-//            var_dump($url);
-//            var_dump($requestString);
-//            die;
 
             $con = curl_init((string)$url);
             curl_setopt($con, CURLOPT_HEADER, false);
@@ -204,9 +210,6 @@
             curl_setopt($con, CURLOPT_TIMEOUT,(int)$timeout);
 
             $ret = curl_exec($con);
-
-//            var_dump($ret);
-//            die;
             
             return json_decode($ret, true);
         }
@@ -300,21 +303,43 @@
 		}
 
 		public function getTop(){
-
-            $end = $this->postCurl($this->url . $this->top['apiversion'] . '/' . $this->top['method'], json_encode($this->top));
-
-            if($end['data']['status'] == 'fail'){
-                $this->updateToken();
-                return true;
+            
+            if($this->my_val < $this->top_val){
+                return false;
             }
 
+            $end = $this->postCurl($this->url . $this->top['apiversion'] . '/' . $this->top['method'], json_encode($this->top));
+            
+            if($end['data']['status'] == 'fail'){
+                $this->updateToken();
+                echo date('Y-m-d H:i:s', time()) . " 修改token\r\n";
+                return 0;
+            }
+            
             $data = $end['data']['list'];
+            
+            echo date('Y-m-d H:i:s', time()) . ' 当前分数为' . $end['data']['my_value'] . '，排名为' . $end['data']['my_rank'] . "\r\n";
+            
+            if (!is_array($data) || count($data) == 0){
+                return false;
+            }
+            
+            if ($end['data']['my_rank'] == 1){
+                echo date('Y-m-d H:i:s', time()) . ' 第二名为' . $data[1]['integral'] . '，是' . $data[1]['dep_name'] . '的' . $data[1]['name'] . "\r\n";
+            
+            }else{
+                echo date('Y-m-d H:i:s', time()) . ' 第一名为' . $data[0]['integral'] . '，是' . $data[0]['dep_name'] . '的' . $data[0]['name'] . "\r\n";
+    
+            }
+            
+            $this->my_val  = (int)($end['data']['my_value']);
+            $this->top_val = (int)($data[0]['integral']);
 
             if(!is_array($data) || count($data) == 0){
                 return true;
             }
             
-            if ($data[0]['name'] == '吴桐' && $data[0]['integral'] > ($data[1]['integral'] + 100)){
+            if ($end['data']['my_rank'] == 1 && $this->my_val > ($data[1]['integral'] + 100)){
                 return true;
             }
             
