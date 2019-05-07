@@ -357,6 +357,8 @@
         }
     }
     
-    $ob = new getZhushouData();
-    $ob->run();
+//    $ob = new getZhushouData();
+//    $ob->run();
 //    $ob->getTop();
+
+phpinfo();
