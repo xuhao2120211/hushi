@@ -117,10 +117,12 @@
         public $top_val = 0;
         public $my_val  = 0;
         
+        public $chack_val = 0;
+        
         public function run(){
             
             while (true){
-                sleep(rand(10, 20));
+                sleep(rand(5, 15));
 
                 try{
     
@@ -131,7 +133,7 @@
                         
                     } elseif ($end){
                         
-                        sleep(300);
+                        sleep(120);
                         echo date('Y-m-d H:i:s', time()) . " 暂停300秒\r\n";
                         continue;
                     }
@@ -156,10 +158,14 @@
             $end = $this->postCurl($this->url . $this->ans['apiversion'] . '/' . $this->arg['method'], json_encode($this->arg));
 
             $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
-            
+            //var_dump($end);die;
 //            $this->creatDB();
     
             $mis = $this->getMistake();
+            
+            if(!is_array($end['data']['user_paper_items'])){
+                return;
+            }
             
             foreach ($end['data']['user_paper_items'] as $k => $v){
                 $right_answers = $v['qa_item']['right_answers'];
@@ -183,7 +189,7 @@
             
 //            $this->db->close();
         
-            sleep(rand(10, 20));
+            sleep(rand(5, 15));
             
 //            echo json_encode($this->ans);
 //            die;
@@ -303,6 +309,44 @@
 		}
 
 		public function getTop(){
+            /*
+            if ($this->my_val && $this->my_val < $this->chack_val){
+                echo date('Y-m-d H:i:s', time()) . " 当前分数" . $this->my_val . "\r\n";
+                return false;
+            }
+            
+            
+            $end = $this->postCurl($this->url . $this->top['apiversion'] . '/' . $this->top['method'], json_encode($this->top));
+            
+            if($end['data']['status'] == 'fail'){
+                $this->updateToken();
+                echo date('Y-m-d H:i:s', time()) . " 修改token\r\n";
+                return 0;
+            }
+            
+            $this->my_val = $end['data']['my_value'];
+            $this->chack_val = $this->my_val + 100;
+            
+            
+            $data = $end['data']['list'];
+            
+            echo date('Y-m-d H:i:s', time()) . ' 当前分数为' . $end['data']['my_value'] . '，排名为' . $end['data']['my_rank'] . "\r\n";
+            
+            if (!is_array($data) || count($data) == 0){
+                return false;
+            }
+            
+            if ($end['data']['my_rank'] == 1){
+                echo date('Y-m-d H:i:s', time()) . ' 第二名为' . $data[1]['integral'] . '，是' . $data[1]['dep_name'] . '的' . $data[1]['name'] . "\r\n";
+            
+            }else{
+                echo date('Y-m-d H:i:s', time()) . ' 第一名为' . $data[0]['integral'] . '，是' . $data[0]['dep_name'] . '的' . $data[0]['name'] . "\r\n";
+    
+            }
+            
+            
+            return false;
+            */
             
             if($this->my_val < $this->top_val){
                 return false;
@@ -339,7 +383,7 @@
                 return true;
             }
             
-            if ($end['data']['my_rank'] == 1 && $this->my_val > ($data[1]['integral'] + 100)){
+            if ($end['data']['my_rank'] == 1 && $this->my_val > ($data[1]['integral'] + 500)){
                 return true;
             }
             
@@ -357,8 +401,8 @@
         }
     }
     
-//    $ob = new getZhushouData();
-//    $ob->run();
+    $ob = new getZhushouData();
+    $ob->run();
 //    $ob->getTop();
 
-phpinfo();
+//phpinfo();
