@@ -159,7 +159,7 @@ class getZhushouData{
 
         $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
         //var_dump($end);die;
-        $this->creatDB();
+        //$this->creatDB();
 
         $mis = $this->getMistake();
 
@@ -182,9 +182,9 @@ class getZhushouData{
                 'duration' => 0
             ];
 
-                $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
+                //$ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
 
-                $this->insertQuestion($ins);
+                //$this->insertQuestion($ins);
         }
 
 //            $this->db->close();
