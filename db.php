@@ -77,11 +77,35 @@ class db{
      * @param $key_name
      */
     public function getConf($key_name){
-        $sql = "select value from conf where key_name='" . $key_name . "'";
-
+        $sql    = "select value from conf where key_name='" . $key_name . "'";
         $db_ret = $this->db->query($sql);
+        $ret    = $db_ret->fetch_assoc();
 
-        return $db_ret;
+        return $ret['value'];
+    }
+
+    /**
+     * 修改运行状态配置
+     * @param $status
+     */
+    public function updateOpenRun($status){
+        $sql = "update conf set ='" . $status . "' where key_name='end_time'";
+        $this->db->query($sql);
+    }
+
+    /**
+     * 获得表中数据条数
+     * @param $key_name
+     */
+    public function getCount($table_name){
+        $c_sql = "create table if not exists `" . $table_name . "` like `hushi`;";
+        $this->db->query($c_sql);
+
+        $sql    = 'select count(id) num from ' . $table_name;
+        $db_ret = $this->db->query($sql);
+        $ret    = $db_ret->fetch_assoc();
+
+        return $ret['num'];
     }
 
 }

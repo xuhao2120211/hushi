@@ -10,8 +10,12 @@
  * 当前时间
  * @return time
  */
-function nowTime(){
-    return date('Y-m-d H:i:s', time(true));
+function nowTime($time = ''){
+    date_default_timezone_set('Asia/Shanghai');
+    if(!$time){
+        $time = time();
+    }
+    return date('Y-m-d H:i:s', $time);
 }
 
 /**
@@ -19,7 +23,12 @@ function nowTime(){
  * @param $str
  */
 function showStr($str){
-    echo nowTime() . ' ' . $str . "\r\n";
+    $LogFile = 'log/' . date('Ymd') . '.log';
+
+    $echo_text = nowTime() . ' ' . $str . PHP_EOL;
+
+    //echo $echo_text;
+    file_put_contents($LogFile, $echo_text, FILE_APPEND);
 }
 
 /**
@@ -67,36 +76,6 @@ function getSel($sel){
 }
 
 /**
- * curl请求
- * @param $url
- * @param $requestString
- * @param int $timeout
- * @return bool|mixed
- */
-function postCurl($url,$requestString,$timeout = 5){
-    if($url == '' || $requestString == '' || $timeout <= 0){
-        return false;
-    }
-    $headers = [
-        "Content-type: application/json;charset='utf-8'",
-        "Accept: application/json",
-        "Cache-Control: no-cache"
-    ];
-
-    $con = curl_init((string)$url);
-    curl_setopt($con, CURLOPT_HEADER, false);
-    curl_setopt($con, CURLOPT_POSTFIELDS, $requestString);
-    curl_setopt($con, CURLOPT_POST,true);
-    curl_setopt($con, CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($con, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($con, CURLOPT_TIMEOUT,(int)$timeout);
-
-    $ret = curl_exec($con);
-
-    return json_decode($ret, true);
-}
-
-/**
  * 模拟错题，随机返回错题，第几道题错误
  * @return array
  */
@@ -115,3 +94,57 @@ function getMistake(){
 
     return $ret;
 }
+
+
+/**
+ * curl请求
+ * @param $url
+ * @param $requestString
+ * @param int $timeout
+ * @return bool|mixed
+ */
+function curlRequest($url, $requestString = [], $head = [], $type = 0, $timeout = 5){
+    if($url == '' || $timeout <= 0){
+        return false;
+    }
+
+    $headers = [
+        "Content-type: application/json;charset='utf-8'",
+        "Accept: application/json",
+        "Cache-Control: no-cache"
+    ];
+
+    if(is_array($head) && count($head) > 0){
+        $headers = array_merge($headers, $head);
+    }
+
+    $con = curl_init((string)$url);
+
+    // 参数
+    if(is_array($requestString) && count($requestString) > 0){
+        curl_setopt($con, CURLOPT_POSTFIELDS, json_encode($requestString));
+
+        if($type == 0){
+            // POST
+            curl_setopt($con, CURLOPT_POST,true);
+
+        }elseif($type == 1){
+            // PUT
+            curl_setopt($con, CURLOPT_CUSTOMREQUEST,"PUT");
+
+        }elseif($type == 2){
+            // DELETE
+            curl_setopt($con, CURLOPT_CUSTOMREQUEST,"DELETE");
+        }
+    }
+
+    curl_setopt($con, CURLOPT_HEADER, false);
+    curl_setopt($con, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($con, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($con, CURLOPT_TIMEOUT,(int)$timeout);
+
+    $ret = curl_exec($con);
+
+    return json_decode($ret, true);
+}
+
