@@ -22,24 +22,37 @@ class bmob{
      * 获得配置信息
      * @param $key_name
      */
-    public function getConf($key_name){
-        $where = urlencode(json_encode(['key_name' => $key_name]));
-        $url   = $this->url . 'conf?where=' . $where;
+    public function getConf($obj){
+        $url   = $this->url . 'conf';
 
         $ret   = curlRequest($url, [], $this->header);
 
-        return $ret['results'][0]['value'];
+        if(!$ret || !isset($ret['results'])){
+            return false;
+        }
+
+        foreach($ret['results'] as $val){
+            if(!isset($val['key_name']) || !isset($val['value'])){
+
+                showStr('获取配置失败');
+                return false;
+            }
+            $key_name = $val['key_name'];
+            $obj->$key_name = $val['value'];
+        }
+
+        return true;
     }
 
     /**
      * 修改运行状态配置
      * @param $status
      */
-    public function updateOpenRun($status){
-        $where = urlencode(json_encode(['key_name' => 'open_run']));
+    public function updateConf($name, $value){
+        $where = urlencode(json_encode(['key_name' => $name]));
         $url   = $this->url . 'conf?where=' . $where;
 
-        curlRequest($url, ['value' => $status], $this->header, 2);
+        curlRequest($url, ['value' => $value], $this->header, 1);
     }
 
 

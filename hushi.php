@@ -12,16 +12,6 @@ include_once 'tools.php';
 class hushi{
     public $url = 'http://www.hulizhushou.com/api/';
 
-    // 到第一后的睡眠时间
-    public $sleep_time = 120;
-
-    // 模拟做题间隙睡眠时间范围
-    public $write_sleep_min = 5;
-    public $write_sleep_max = 10;
-
-    // 比第二名多出多少分后可以开始睡眠
-    public $exceed_score = 500;
-
     // 数据库对象，用于存题
     public $db;
 
@@ -52,18 +42,13 @@ class hushi{
     // 第二名得分
     public $second_val = 0;
 
-    // 存题开关
-    public $save_question = 0;
-
-    // 开始开关
-    public $open_run = 0;
-
     // 开始时间
     public $start_time = '';
 
     // 结束时间
     public $end_time = '';
 
+    // 最后一次请求排行的时间
     public $last_rank_time = 0;
 
     public $arg = [
@@ -154,31 +139,38 @@ class hushi{
      */
     public function run(){
         date_default_timezone_set('Asia/Shanghai');
-
         $this->bmob = new bmob();
 
-        $this->db = new db();
-        $this->db->creatDB();
-
-        $this->setStartTime();
-
         while (true){
-//            writeSleep($this->write_sleep_min, $this->write_sleep_max);
+
+            // 获取所有配置
+            $get_conf_end = $this->bmob->getConf($this);
+
+            // 根据开始时间开启任务
+            $this->ifStartTime();
 
             // 判断是否开始跑，不跑则睡眠一分钟
-            if(!$this->bmob->getConf('open_run')){
-                showStr('暂停60秒');
-                $this->end_time = '';
+            if(!$get_conf_end || !$this->open_run){
+                showStr('未开启，暂停60秒');
                 sleep(60);
-
                 continue;
             }
 
             // 设置结束时间
             $this->setEndTime();
 
-            try{
+            // 结束
+            if(time() > strtotime($this->end_time)){
+                $this->bmob->updateConf('open_run', '0');
+                $this->bmob->updateConf('end_time', '');
+                $this->end_time   = '';
+                showStr('结束跑题');
+            }
 
+            // 做题间隙睡眠
+            writeSleep($this->write_sleep_min, $this->write_sleep_max);
+
+            try{
                 // 获得排行
                 $end = $this->getTop();
 
@@ -188,8 +180,8 @@ class hushi{
 
                 } elseif ($end){
 
-                    sleep($this->sleep_time);
                     showStr('暂停' . $this->sleep_time . '秒');
+                    sleep($this->sleep_time);
                     continue;
                 }
 
@@ -200,11 +192,6 @@ class hushi{
                 $this->updateToken();
                 showStr('修改token');
             }
-
-            // 结束
-            if(time() > $this->end_time){
-                $this->bmob->updateOpenRun('0');
-            }
         }
     }
 
@@ -213,8 +200,12 @@ class hushi{
      * @return bool|mixed|void
      */
     public function runOne(){
-
         $now_question = $this->randRetQustion();
+        if(!$now_question){
+            showStr('获取题目列表失败');
+            return false;
+        }
+
 
         // 当前要跑的题id
         $this->arg['project_id'] = $now_question['q_id'];
@@ -222,7 +213,9 @@ class hushi{
         $end = curlRequest($this->url . $this->ans['apiversion'] . '/' . $this->arg['method'], $this->arg);
 
         // 返回报错
-        if(!is_array($end['data']['user_paper_items'])){
+        if(!is_array($end['data'])){
+            return;
+        }elseif (!isset($end['data']['user_paper_items']) || !is_array($end['data']['user_paper_items'])){
             return;
         }
 
@@ -231,8 +224,9 @@ class hushi{
         // 模拟人工错题
         $mis = getMistake();
 
-        // 确认是否需要存题
-        $this->save_question = $this->bmob->getConf('save');
+        $this->db = new db();
+        $this->db->creatDB();
+
         // 存题的库名
         $table_name = 'question_' . $now_question['q_id'];
         // 已存的题数
@@ -256,11 +250,13 @@ class hushi{
             ];
 
             // 存题
-            if($this->save_question && $save_ques){
+            if($this->save && $save_ques){
                 $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
-                $this->db->insertQuestion($ins);
+                $this->db->insertQuestion($ins, $table_name);
             }
         }
+
+        $this->db->closeDB();
 
         // 模拟人工做题时间
         writeSleep($this->write_sleep_min, $this->write_sleep_max);
@@ -370,10 +366,21 @@ class hushi{
     }
 
     /**
-     * 设置开始时间
+     * 根据开始时间确定是否要开始任务
      */
-    public function setStartTime(){
-        $this->start_time = nowTime();
+    public function ifStartTime(){
+        if(!property_exists($this, 'start_time') || !$this->start_time || time() < strtotime($this->start_time)){
+            return;
+        }
+
+        // 未开始任务，则将任务开启
+        if(property_exists($this, 'open_run') && !$this->open_run == '1'){
+            $this->bmob->updateConf('open_run', '1');
+            $this->open_run = '1';
+        }
+
+        // 置空开始时间
+        $this->bmob->updateConf('start_time', '');
     }
 
 
@@ -382,16 +389,14 @@ class hushi{
      */
     public function setEndTime(){
         if($this->end_time != ''){
-            return '';
+            return;
         }
 
         date_default_timezone_set('Asia/Shanghai');
-        $this->end_time = $this->bmob->getConf('end_time');
 
         if(empty($this->end_time) || strtotime($this->end_time) < time()){
-            $this->end_time = strtotime(date('Y-m-d', time()) . ' +1 day');
-        }else{
-            $this->end_time = strtotime($this->end_time);
+            $this->end_time = date('Y-m-d 00:00:00', strtotime('+1 day'));
+            $this->bmob->updateConf('end_time', $this->end_time);
         }
     }
 
@@ -403,6 +408,9 @@ class hushi{
      */
     public function randRetQustion($type = 1){
         $qustion_list = $this->bmob->getQuestionList();
+        if(!is_array($qustion_list)){
+            return false;
+        }
 
         if($type == 1){
             $ret_id = rand(0, count($qustion_list) - 1);

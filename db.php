@@ -44,7 +44,7 @@ class db{
      * 插入试题信息
      * @param $ins
      */
-    public function insertQuestion($ins){
+    public function insertQuestion($ins, $table_name){
         $all_sel = array_pop($ins);
         $ans_text = [];
 
@@ -54,14 +54,12 @@ class db{
         }
         $ins[] = implode(',', $ans_text);
 
-        $sql = "INSERT INTO hushi (q_id, q_text, q_sel, q_sel_text) VALUES ('" . implode("','", $ins) . "')";
-
-
+        $sql = "INSERT INTO " . $table_name . " (q_id, q_text, q_sel, q_sel_text) VALUES ('" . implode("','", $ins) . "')";
 
         if ($this->db->query($sql) === TRUE) {
-            echo date('Y-m-d H:i:s', time()) . ' ' . $ins[0] . " 新记录插入成功\r\n";
+            showStr($ins[0] . " 新记录插入成功");
         } else {
-            echo "Error: " . date('Y-m-d H:i:s', time()) . ' ' . $sql . "<br>" . $this->db->error . "\r\n";
+            showStr('Error: ' . $sql . '   ' . $this->db->error);
         }
     }
 
@@ -70,6 +68,7 @@ class db{
      */
     public function closeDB(){
         $this->db->close();
+        $this->db = null;
     }
 
     /**
