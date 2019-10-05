@@ -22,12 +22,16 @@ class bmob{
      * 获得配置信息
      * @param $key_name
      */
-    public function getConf($obj){
+    public function getConf($obj, $retry = 0){
         $url   = $this->url . 'conf';
 
         $ret   = curlRequest($url, [], $this->header);
 
         if(!$ret || !isset($ret['results'])){
+            $retry++;
+            if($retry <= 3){
+                return $this->getConf($obj, $retry);
+            }
             return false;
         }
 
@@ -70,6 +74,6 @@ class bmob{
 
         $ret   = curlRequest($url, [], $this->header);
 
-        return $ret['results'];
+        return isset($ret['results']) ? $ret['results'] : false;
     }
 }

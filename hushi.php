@@ -199,10 +199,13 @@ class hushi{
      * 模拟一次做题，每次做十道
      * @return bool|mixed|void
      */
-    public function runOne(){
+    public function runOne($retry = 0){
         $now_question = $this->randRetQustion();
         if(!$now_question){
-            showStr('获取题目列表失败');
+            showStr('获取题目列表失败' . $retry++);
+            if($retry <= 3){
+                return $this->runOne($retry);
+            }
             return false;
         }
 
@@ -214,8 +217,10 @@ class hushi{
 
         // 返回报错
         if(!is_array($end['data'])){
+            showStr('报错为' . json_encode($end));
             return;
         }elseif (!isset($end['data']['user_paper_items']) || !is_array($end['data']['user_paper_items'])){
+            showStr('结构错误' . json_encode($end));
             return;
         }
 
