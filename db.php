@@ -97,7 +97,15 @@ class db{
      * @param $key_name
      */
     public function getCount($table_name){
-        $c_sql = "create table if not exists `" . $table_name . "` like `hushi`;";
+        $c_sql = "CREATE TABLE IF NOT EXISTS `" . $table_name . "` (
+                  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                  `q_id` int(11) NOT NULL,
+                  `q_text` text,
+                  `q_sel` varchar(255) DEFAULT NULL,
+                  `q_sel_text` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  UNIQUE KEY `in_q_id` (`q_id`)
+                  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         $this->db->query($c_sql);
 
         $sql    = 'select count(id) num from ' . $table_name;
