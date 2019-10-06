@@ -152,7 +152,7 @@ class hushi{
             // 判断是否开始跑，不跑则睡眠一分钟
             if(!$get_conf_end || !$this->open_run){
                 showStr('未开启，暂停60秒');
-                sleep(60);
+//                sleep(60);
                 continue;
             }
 
@@ -168,7 +168,7 @@ class hushi{
             }
 
             // 做题间隙睡眠
-            writeSleep($this->write_sleep_min, $this->write_sleep_max);
+//            writeSleep($this->write_sleep_min, $this->write_sleep_max);
 
             try{
                 // 获得排行
@@ -270,7 +270,9 @@ class hushi{
         $end = curlRequest($this->url . $this->ans['apiversion'] . '/' . $this->ans['method'], $this->ans);
 
         // 增加得分
-        $this->my_val += 10;
+        if(isset($end['success']) && $end['success']){
+            $this->my_val += 10;
+        }
 
         return $end;
     }
