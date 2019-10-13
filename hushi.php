@@ -287,7 +287,7 @@ class hushi{
             showStr('当前分数为' . $this->my_val . ',上次查询的最高分为' . $this->top_val);
             return false;
         }
-
+var_dump($this->last_rank_time);
         // 由于排行每五分钟更新一次，所以每五分钟返回一次查询
         if($this->last_rank_time + 305 < time()){
             $minute = date('m', time());
