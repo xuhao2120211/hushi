@@ -25,6 +25,10 @@ function nowTime($time = ''){
 function showStr($str){
     $LogFile = 'log/' . date('Ymd') . '.log';
 
+    if(is_array($str)){
+        $str = var_export($str);
+    }
+    
     $echo_text = nowTime() . ' ' . $str . PHP_EOL;
 
     //echo $echo_text;

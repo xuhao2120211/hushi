@@ -148,7 +148,7 @@ class hushi{
 
             // 根据开始时间开启任务
             $this->ifStartTime();
-
+            
             // 判断是否开始跑，不跑则睡眠一分钟
             if(!$get_conf_end || !$this->open_run){
                 showStr('未开启，暂停60秒');
@@ -283,7 +283,7 @@ class hushi{
      * @return bool|int
      */
     public function getTop(){
-        if($this->my_val < $this->top_val){
+        if($this->my_val < $this->top_val && $this->last_rank_time + 305 >= time()){
             showStr('当前分数为' . $this->my_val . ',上次查询的最高分为' . $this->top_val);
             return false;
         }
