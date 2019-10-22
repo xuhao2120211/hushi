@@ -48,6 +48,8 @@ class hushi{
     // 结束时间
     public $end_time = '';
 
+    public $start_run_time = '';
+
     // 最后一次请求排行的时间
     public $last_rank_time = 0;
 
@@ -141,7 +143,11 @@ class hushi{
         date_default_timezone_set('Asia/Shanghai');
         $this->bmob = new bmob();
 
+        $this->start_run_time = date('Y-m-d');
         while (true){
+            if($this->start_run_time != date('Y-m-d')){
+                die;
+            }
 
             // 获取所有配置
             $get_conf_end = $this->bmob->getConf($this);
@@ -283,7 +289,7 @@ class hushi{
      * @return bool|int
      */
     public function getTop(){
-        if($this->my_val < $this->top_val && $this->last_rank_time + 305 >= time()){
+        if($this->my_val < $this->top_val && $this->last_rank_time + 305 < time()){
             showStr('当前分数为' . $this->my_val . ',上次查询的最高分为' . $this->top_val);
             return false;
         }
