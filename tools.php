@@ -23,7 +23,7 @@ function nowTime($time = ''){
  * @param $str
  */
 function showStr($str){
-    $LogFile = 'log/' . date('Ymd') . '.log';
+    $LogFile = __DIR__ . '/log/' . date('Ymd') . '.log';
 
     if(is_array($str)){
         $str = var_export($str);
