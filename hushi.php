@@ -54,32 +54,32 @@ class hushi{
     public $last_rank_time = 0;
 
     public $arg = [
-        "project_id"    => "113581",
+        "project_id"    => "",
         "paper_id"      => "",
-        "systemVersion" => "9",
-        "deviceModel"   => "ALP-AL00",
-        "codeVersion"   => "4.0.3",
+        "systemVersion" => "12.3.1",
+        "deviceModel"   => "iPhone",
+        "codeVersion"   => "4.5.0",
         "method"        => "hlzs/paper/fetch",
         "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"       => "9783176383fcc8d468725fe8a10b5806",
+        "call_id"       => "c7d2ab382925a98ec932b10a7931c464",
         "apiversion"    => "1.0",
-        "sig"           => "d50843479ad5e5656f80b3d390ca4cad",
-        "access_token"  => "4bbb227d1b7afee52eff1316b1212abc",
+        "sig"           => "5eaabe994b71ecf589aa02c9b311a839",
+        "access_token"  => "96e34a564b9a666f9bed87ea70561df1",
     ];
 
 
     public $ans = [
         "user_paper_id" => "",
         "answer"        => [],
-        "systemVersion" => "9",
-        "deviceModel"   => "ALP-AL00",
-        "codeVersion"   => "4.0.3",
+        "systemVersion" => "12.3.1",
+        "deviceModel"   => "iPhone",
+        "codeVersion"   => "4.5.0",
         "method"        => "hlzs/paper/commit",
         "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"       => "fa1f57606f0368b91fd955b01cfa7ade",
+        "call_id"       => "006ce2b66aec87467ff3ef69730f6bca",
         "apiversion"    => "1.0",
-        "sig"           => "999a37fcb7968961f03f55e24cb1c2d6",
-        "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+        "sig"           => "270a2a5deaf8be2d8a8690590c43bddc",
+        "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
     ];
 
 
@@ -87,53 +87,63 @@ class hushi{
         "top"           => 2,
         "range"         => "daily",
         "order_type"    => "integral",
-        "systemVersion" => "9",
-        "deviceModel"   => "ALP-AL00",
-        "codeVersion"   => "4.0.3",
+        "systemVersion" => "12.3.1",
+        "deviceModel"   => "iPhone",
+        "codeVersion"   => "4.5.0",
         "method"        => "hlzs/integral/rank",
         "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"       => "2c73337646bda15e23c7cb280beae181",
+        "call_id"       => "bfbc3affb7d6fa8fc0c9ab825acc1051",
         "apiversion"    => "2.0",
-        "sig"           => "fd62788bf22cfda14a1f672eb766c876",
-        "access_token"  => "4bbb227d1b7afee52eff1316b1212abc",
-    ];
-
-    public $andr = [
-        'arg' => [
-            "call_id"       => "9783176383fcc8d468725fe8a10b5806",
-            "sig"           => "d50843479ad5e5656f80b3d390ca4cad",
-            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc",
-        ],
-        'ans' => [
-            "call_id"       => "fa1f57606f0368b91fd955b01cfa7ade",
-            "sig"           => "999a37fcb7968961f03f55e24cb1c2d6",
-            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc",
-        ],
-        'top' => [
-            "call_id"       => "2c73337646bda15e23c7cb280beae181",
-            "sig"           => "fd62788bf22cfda14a1f672eb766c876",
-            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc",
-        ]
+        "sig"           => "200515fa7e6567d2f3c517332fc0b6b8",
+        "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
     ];
 
     public $ios = [
         'arg' => [
-            "call_id"       => "65dd88e8392aa7f50c97a427e2e5f0af",
-            "sig"           => "2a755ce9f79f5d5e3a2a75f05610d7df",
+            "systemVersion" => "12.3.1",
+            "deviceModel"   => "iPhone",
+            "call_id"       => "c7d2ab382925a98ec932b10a7931c464",
+            "sig"           => "5eaabe994b71ecf589aa02c9b311a839",
             "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
         ],
         'ans' => [
-            "call_id"       => "14580d0e01e56b4d61fe9a9aca349c00",
-            "sig"           => "0cd55916d83aade3c52d91152181005f",
+            "systemVersion" => "12.3.1",
+            "deviceModel"   => "iPhone",
+            "call_id"       => "006ce2b66aec87467ff3ef69730f6bca",
+            "sig"           => "270a2a5deaf8be2d8a8690590c43bddc",
             "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
         ],
         'top' => [
-            "call_id"       => "12084ee8028d7f9c8075a363e019551d",
-            "sig"           => "d1384263e70235bf75f8312b754b66d8",
+            "systemVersion" => "12.3.1",
+            "deviceModel"   => "iPhone",
+            "call_id"       => "bfbc3affb7d6fa8fc0c9ab825acc1051",
+            "sig"           => "200515fa7e6567d2f3c517332fc0b6b8",
             "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
         ]
-
-
+    ];
+    
+    public $andr = [
+        'arg' => [
+            "systemVersion" => "9",
+            "deviceModel"   => "ALP-AL00",
+            "call_id"       => "d8c98a2b5a1a2d1237ae6c929b43e8fb",
+            "sig"           => "840a05b3de269fdda0b43dbe92614a53",
+            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+        ],
+        'ans' => [
+            "systemVersion" => "9",
+            "deviceModel"   => "ALP-AL00",
+            "call_id"       => "3b4cf761dc72238f8564fb1d82e0ed2c",
+            "sig"           => "72538f13759830defe976480488a4b50",
+            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+        ],
+        'top' => [
+            "systemVersion" => "9",
+            "deviceModel"   => "ALP-AL00",
+            "call_id"       => "b18eccf33b444eaf8befe6475640183d",
+            "sig"           => "2b1c721ccdaab602b305464276e2d7bd",
+            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+        ]
     ];
 
     /**
