@@ -1,1 +1,1 @@
-nohup php index.php &
+nohup php /usr/local/www/hushi/index.php &
