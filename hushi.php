@@ -222,6 +222,7 @@ class hushi{
      * @return bool|mixed|void
      */
     public function runOne($retry = 0){
+        $add_cons = 0;
         $now_question = $this->randRetQustion();
         if(!$now_question){
             showStr('获取题目列表失败' . $retry++);
@@ -248,7 +249,7 @@ class hushi{
 
         $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
 
-        // 模拟人工错题
+        // 模拟人工错题当前分数为
         $mis = getMistake($this->mix_min, $this->mix_max);
 
         $this->db = new db();
@@ -267,6 +268,8 @@ class hushi{
             if(in_array($k, $mis)){
                 unset($mis[$k]);
                 $right_answers = $this->rand_str[rand(0, count($v['qa_item']['sel_items']) - 1)];
+            }else{
+                $add_cons += 1;
             }
 
             $right_answers = explode(',', $right_answers);
@@ -293,7 +296,7 @@ class hushi{
 
         // 增加得分
         if(isset($end['success']) && $end['success']){
-            $this->my_val += 10;
+            $this->my_val += $add_cons;
         }
 
         return $end;
