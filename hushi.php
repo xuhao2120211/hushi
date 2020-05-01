@@ -51,10 +51,10 @@ class hushi{
     public $start_run_time = '';
     
     // 错题数，最小值
-    public $mix_min = 0;
+    public $mis_min = 0;
     
     // 错题数，最大值
-    public $mix_max = 1;
+    public $mis_max = 1;
 
     // 最后一次请求排行的时间
     public $last_rank_time = 0;
