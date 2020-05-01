@@ -49,6 +49,12 @@ class hushi{
     public $end_time = '';
 
     public $start_run_time = '';
+    
+    // 错题数，最小值
+    public $mix_min = 0;
+    
+    // 错题数，最大值
+    public $mix_max = 1;
 
     // 最后一次请求排行的时间
     public $last_rank_time = 0;
@@ -243,7 +249,7 @@ class hushi{
         $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
 
         // 模拟人工错题
-        $mis = getMistake();
+        $mis = getMistake($this->mix_min, $this->mix_max);
 
         $this->db = new db();
         $this->db->creatDB();
@@ -303,7 +309,7 @@ class hushi{
             showStr('当前分数为' . $this->my_val . ',上次查询的最高分为' . $this->top_val);
             return false;
         }
-var_dump($this->last_rank_time);
+
         // 由于排行每五分钟更新一次，所以每五分钟返回一次查询
         if($this->last_rank_time + 305 < time()){
             $minute = date('m', time());

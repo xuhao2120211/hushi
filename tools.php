@@ -83,11 +83,15 @@ function getSel($sel){
  * 模拟错题，随机返回错题，第几道题错误
  * @return array
  */
-function getMistake(){
+function getMistake($min = 0, $max = 1){
     $ret = [];
+    if(empty($max)){
+        return $ret;
+    }
+    
     $ans_arr = array_rand(range(1,10), 10);
     shuffle($ans_arr);
-    $num = rand(0, 1);
+    $num = rand($min, $max);
     if (!$num){
         return $ret;
     }
