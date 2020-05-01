@@ -250,7 +250,7 @@ class hushi{
         $this->ans['user_paper_id'] = $end['data']['user_paper_id'];
 
         // 模拟人工错题当前分数为
-        $mis = getMistake($this->mix_min, $this->mix_max);
+        $mis = getMistake($this->mis_min, $this->mis_max);
 
         $this->db = new db();
         $this->db->creatDB();
