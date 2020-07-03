@@ -130,25 +130,29 @@ class hushi{
     
     public $andr = [
         'arg' => [
-            "systemVersion" => "9",
-            "deviceModel"   => "ALP-AL00",
-            "call_id"       => "d8c98a2b5a1a2d1237ae6c929b43e8fb",
-            "sig"           => "840a05b3de269fdda0b43dbe92614a53",
-            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+            "systemVersion" => "12.2",
+            "deviceModel" => "iPhone",
+            "codeVersion" => "4.2.0",
+            "call_id" => "060e446843a828f42abc08ac4fd08952",
+            "sig" => "377d8af11be0768b1a17c88305439664",
+            "access_token" => "57dd05377dbb64eded01539c13f38bda"
         ],
         'ans' => [
-            "systemVersion" => "9",
-            "deviceModel"   => "ALP-AL00",
-            "call_id"       => "3b4cf761dc72238f8564fb1d82e0ed2c",
-            "sig"           => "72538f13759830defe976480488a4b50",
-            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+            "systemVersion" => "12.2",
+            "deviceModel" => "iPhone",
+            "codeVersion" => "4.2.0",
+            "call_id" => "cb1c551d37150727f64777ed817b791b",
+            "sig" => "4fa641151aa8aed38ef36505ebc7bb4d",
+            "access_token" => "57dd05377dbb64eded01539c13f38bda"
+            
         ],
         'top' => [
-            "systemVersion" => "9",
-            "deviceModel"   => "ALP-AL00",
-            "call_id"       => "b18eccf33b444eaf8befe6475640183d",
-            "sig"           => "2b1c721ccdaab602b305464276e2d7bd",
-            "access_token"  => "4bbb227d1b7afee52eff1316b1212abc"
+            "systemVersion" => "12.2",
+            "deviceModel" => "iPhone",
+            "codeVersion" => "4.2.0",
+            "call_id" => "56c89cf68f9d45992653dcdfd81619fa",
+            "sig" => "6f11ea557df2089259a37c3e3500f51f",
+            "access_token" => "57dd05377dbb64eded01539c13f38bda"
         ]
     ];
 
