@@ -125,8 +125,8 @@ class hushi{
             "systemVersion" => "12.3.1",
             "deviceModel"   => "iPhone",
             "codeVersion"   => "4.5.0",
-            "call_id"       => "9168592a6e06da1de097d6870ff16fa7",
-            "sig"           => "d88d4c2031dd008662f5806f1d92195e",
+            "call_id"       => "9deca4e91fdb66d752f58883883e7faa",
+            "sig"           => "3af6e1440b2523c1fe6d95334e262756",
             "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
         ]
     ];
