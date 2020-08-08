@@ -108,22 +108,25 @@ class hushi{
         'arg' => [
             "systemVersion" => "12.3.1",
             "deviceModel"   => "iPhone",
-            "call_id"       => "c7d2ab382925a98ec932b10a7931c464",
-            "sig"           => "5eaabe994b71ecf589aa02c9b311a839",
+            "codeVersion"   => "4.5.0",
+            "call_id"       => "9b154068a53b005df09abbc8214823d5",
+            "sig"           => "dccb26d3fe9e1ad571eb5e27ceb88e99",
             "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
         ],
         'ans' => [
             "systemVersion" => "12.3.1",
             "deviceModel"   => "iPhone",
-            "call_id"       => "006ce2b66aec87467ff3ef69730f6bca",
-            "sig"           => "270a2a5deaf8be2d8a8690590c43bddc",
+            "codeVersion"   => "4.5.0",
+            "call_id"       => "2e4b8571bda10e640fe2bde3a5c1263c",
+            "sig"           => "53dbd5a5e697889c72fe9bc44bc6bd2d",
             "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
         ],
         'top' => [
             "systemVersion" => "12.3.1",
             "deviceModel"   => "iPhone",
-            "call_id"       => "bfbc3affb7d6fa8fc0c9ab825acc1051",
-            "sig"           => "200515fa7e6567d2f3c517332fc0b6b8",
+            "codeVersion"   => "4.5.0",
+            "call_id"       => "9168592a6e06da1de097d6870ff16fa7",
+            "sig"           => "d88d4c2031dd008662f5806f1d92195e",
             "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
         ]
     ];
