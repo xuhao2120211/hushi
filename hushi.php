@@ -67,9 +67,9 @@ class hushi{
         "codeVersion"   => "4.5.0",
         "method"        => "hlzs/paper/fetch",
         "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"       => "c7d2ab382925a98ec932b10a7931c464",
+        "call_id"       => "9b154068a53b005df09abbc8214823d5",
         "apiversion"    => "1.0",
-        "sig"           => "5eaabe994b71ecf589aa02c9b311a839",
+        "sig"           => "dccb26d3fe9e1ad571eb5e27ceb88e99",
         "access_token"  => "96e34a564b9a666f9bed87ea70561df1",
     ];
 
@@ -82,9 +82,9 @@ class hushi{
         "codeVersion"   => "4.5.0",
         "method"        => "hlzs/paper/commit",
         "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"       => "006ce2b66aec87467ff3ef69730f6bca",
+        "call_id"       => "2e4b8571bda10e640fe2bde3a5c1263c",
         "apiversion"    => "1.0",
-        "sig"           => "270a2a5deaf8be2d8a8690590c43bddc",
+        "sig"           => "53dbd5a5e697889c72fe9bc44bc6bd2d",
         "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
     ];
 
@@ -98,9 +98,9 @@ class hushi{
         "codeVersion"   => "4.5.0",
         "method"        => "hlzs/integral/rank",
         "api_key"       => "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"       => "bfbc3affb7d6fa8fc0c9ab825acc1051",
+        "call_id"       => "9deca4e91fdb66d752f58883883e7faa",
         "apiversion"    => "2.0",
-        "sig"           => "200515fa7e6567d2f3c517332fc0b6b8",
+        "sig"           => "3af6e1440b2523c1fe6d95334e262756",
         "access_token"  => "96e34a564b9a666f9bed87ea70561df1"
     ];
 
