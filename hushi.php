@@ -136,25 +136,24 @@ class hushi{
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
             "codeVersion" => "4.2.0",
-            "call_id" => "060e446843a828f42abc08ac4fd08952",
-            "sig" => "377d8af11be0768b1a17c88305439664",
+            "call_id" => "ecdf5404fae66b05885027c890467685",
+            "sig" => "fa530a196bf87eb098771169fa6deeec",
             "access_token" => "57dd05377dbb64eded01539c13f38bda"
         ],
         'ans' => [
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
             "codeVersion" => "4.2.0",
-            "call_id" => "cb1c551d37150727f64777ed817b791b",
-            "sig" => "4fa641151aa8aed38ef36505ebc7bb4d",
+            "call_id" => "3ee0c507e28b63e116cfd1409d73ec3d",
+            "sig" => "05ffeab4721a0ee9d28ba453296f0778",
             "access_token" => "57dd05377dbb64eded01539c13f38bda"
-            
         ],
         'top' => [
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
             "codeVersion" => "4.2.0",
-            "call_id" => "56c89cf68f9d45992653dcdfd81619fa",
-            "sig" => "6f11ea557df2089259a37c3e3500f51f",
+            "call_id" => "2ffe0d4dd361e522b41dcb2fe39dd3bb",
+            "sig" => "917335f266e78e44751ca350d176cabf",
             "access_token" => "57dd05377dbb64eded01539c13f38bda"
         ]
     ];
