@@ -258,15 +258,15 @@ class hushi{
         // 模拟人工错题当前分数为
         $mis = getMistake($this->mis_min, $this->mis_max);
 
-        $this->db = new db();
-        $this->db->creatDB();
+//        $this->db = new db();
+//        $this->db->creatDB();
 
         // 存题的库名
         $table_name = 'question_' . $now_question['q_id'];
-        // 已存的题数
-        $now_count  = $this->db->getCount($table_name);
-        // 是否已存满题，0继续存，1不再存
-        $save_ques  = $now_count >= $now_question['num'] ? 0 : 1;
+//        // 已存的题数
+//        $now_count  = $this->db->getCount($table_name);
+//        // 是否已存满题，0继续存，1不再存
+//        $save_ques  = $now_count >= $now_question['num'] ? 0 : 1;
 
         foreach ($end['data']['user_paper_items'] as $k => $v){
             $right_answers = $v['qa_item']['right_answers'];
@@ -286,13 +286,13 @@ class hushi{
             ];
 
             // 存题
-            if($this->save && $save_ques){
-                $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
-                $this->db->insertQuestion($ins, $table_name);
-            }
+//            if($this->save && $save_ques){
+//                $ins = [$v['id'], $v['qa_item']['name'], $v['qa_item']['right_answers'], $v['qa_item']['sel_items']];
+//                $this->db->insertQuestion($ins, $table_name);
+//            }
         }
 
-        $this->db->closeDB();
+//        $this->db->closeDB();
 
         // 模拟人工做题时间
         writeSleep($this->write_sleep_min, $this->write_sleep_max);
