@@ -21,8 +21,8 @@ class db{
         }
 
         $servername = "127.0.0.1";
-        $username   = "xuhao";
-        $password   = "Xh2120211";
+        $username   = "root";
+        $password   = "123456";
         $dbname     = "hushi";
 
         // 创建连接
