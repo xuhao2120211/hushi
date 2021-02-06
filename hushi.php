@@ -275,7 +275,7 @@ class hushi{
 
         // 提交做题结果
         $end = curlRequest($this->url . $this->ans['apiversion'] . '/' . $this->ans['method'], $this->ans);
-
+        $this->ans['answer'] = array();
         // 增加得分
         if(isset($end['success']) && $end['success']){
             $this->my_val += $add_cons;
