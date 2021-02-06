@@ -361,6 +361,7 @@ class hushi{
         }
 
         if ($end['data']['my_rank'] == 1 && $this->my_val > ($data[1]['integral'] + $this->exceed_score)){
+            showStr('追赶分数为' . $this->exceed_score);
             return true;
         }
 
