@@ -67,10 +67,10 @@ class hushi{
         "codeVersion"=> "5.0.5",
         "method"=> "hlzs/paper/fetch",
         "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"=> "b06354d92a8485ee7197012343199dca",
+        "call_id"=> "d1f513c76491a7a2fadf5a5a147ce9bd",
         "apiversion"=> "1.0",
-        "sig"=> "8a5d2a10b34cfb76cfa28325d1a109c6",
-        "access_token"=> "1f3ce69fec72e7a9859ce8ad0517277f"
+        "sig"=> "3bf712b908577bbd48ae41c01d6a6082",
+        "access_token"=> "7805863bd2409e45325fb258322a9bf6"
     ];
 
 
@@ -82,10 +82,10 @@ class hushi{
         "codeVersion"=> "5.0.5",
         "method"=> "hlzs/paper/commit",
         "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"=> "5f94c76a4dc01bb8bf7647fcd4a56c20",
+        "call_id"=> "1dc1b98d79fd7734f5dd947b68a3215e",
         "apiversion"=> "1.0",
-        "sig"=> "5f32dda2ed00824138411ed19a46b582",
-        "access_token"=> "1f3ce69fec72e7a9859ce8ad0517277f"
+        "sig"=> "e600cd4ebff30f8ec8e26594015254d2",
+        "access_token"=> "7805863bd2409e45325fb258322a9bf6"
     ];
 
 
@@ -98,10 +98,10 @@ class hushi{
         "codeVersion"=> "5.0.5",
         "method"=> "hlzs/integral/rank",
         "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"=> "95f35a19dc0972c6b3dbb700b16718a6",
+        "call_id"=> "6ae1c39239ed58b68dd78b76b89b058f",
         "apiversion"=> "2.0",
-        "sig"=> "37da46c31871ad8d3b20175411f3276f",
-        "access_token"=> "1f3ce69fec72e7a9859ce8ad0517277f"
+        "sig"=> "7697b1274e115eab6eca62171b8ac7ad",
+        "access_token"=> "7805863bd2409e45325fb258322a9bf6"
     ];
 
     public $ios = [
@@ -109,25 +109,25 @@ class hushi{
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
             "codeVersion"=> "5.0.5",
-            "call_id"=> "b06354d92a8485ee7197012343199dca",
-            "sig"=> "8a5d2a10b34cfb76cfa28325d1a109c6",
-            "access_token"=> "1f3ce69fec72e7a9859ce8ad0517277f"
+            "call_id"=> "d1f513c76491a7a2fadf5a5a147ce9bd",
+            "sig"=> "3bf712b908577bbd48ae41c01d6a6082",
+            "access_token"=> "7805863bd2409e45325fb258322a9bf6"
         ],
         'ans' => [
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
             "codeVersion"=> "5.0.5",
-            "call_id" => "3ee0c507e28b63e116cfd1409d73ec3d",
-            "sig" => "05ffeab4721a0ee9d28ba453296f0778",
-            "access_token" => "57dd05377dbb64eded01539c13f38bda"
+            "call_id"=> "1dc1b98d79fd7734f5dd947b68a3215e",
+            "sig"=> "e600cd4ebff30f8ec8e26594015254d2",
+            "access_token"=> "7805863bd2409e45325fb258322a9bf6"
         ],
         'top' => [
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
             "codeVersion"=> "5.0.5",
-            "call_id"=> "95f35a19dc0972c6b3dbb700b16718a6",
-            "sig"=> "37da46c31871ad8d3b20175411f3276f",
-            "access_token"=> "1f3ce69fec72e7a9859ce8ad0517277f"
+            "call_id"=> "6ae1c39239ed58b68dd78b76b89b058f",
+            "sig"=> "7697b1274e115eab6eca62171b8ac7ad",
+            "access_token"=> "7805863bd2409e45325fb258322a9bf6"
         ]
     ];
     
@@ -222,7 +222,7 @@ class hushi{
 
         // 返回报错
         if(!is_array($end['data'])){
-            showStr('报错为' . json_encode($end));
+            showStr('报错为' . var_export($end, 1));
             return;
         }elseif (!isset($end['data']['user_paper_items']) || !is_array($end['data']['user_paper_items'])){
             showStr('结构错误' . json_encode($end));
