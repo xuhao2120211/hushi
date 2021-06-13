@@ -87,7 +87,7 @@ class bmob{
             $where = urlencode(json_encode(['rid' => $i]));
             $url   = $this->url . 'conf?where=' . $where;
 
-            if(!isset($data[$i])){
+            if(isset($data[$i])){
                 $info = ['num' => $data[$i]['integral'], 'name' => $data[$i]['name']];
             }else{
                 $info = ['num' => 0, 'name' => ''];

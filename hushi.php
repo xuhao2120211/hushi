@@ -221,7 +221,10 @@ class hushi{
         $end = curlRequest($this->url . $this->ans['apiversion'] . '/' . $this->arg['method'], $this->arg);
 
         // 返回报错
-        if(!is_array($end['data'])){
+        if(empty($end)){
+            showStr('请求报错为' . var_export($end, 1));
+            return;
+        }elseif(!is_array($end['data'])){
             showStr('报错为' . var_export($end, 1));
             return;
         }elseif (!isset($end['data']['user_paper_items']) || !is_array($end['data']['user_paper_items'])){
@@ -320,6 +323,11 @@ class hushi{
         $this->last_rank_time = strtotime(date('Y-m-d H:' . $minute . ':00'));
 
         $end = curlRequest($this->url . $this->top['apiversion'] . '/' . $this->top['method'], $this->top);
+        if(empty($end)){
+            showStr('请求报错' . var_export($end, 1));
+            return false;
+
+        }
 
         // 未获取到排行，主要是token错误
         if($end['data']['status'] == 'fail'){
