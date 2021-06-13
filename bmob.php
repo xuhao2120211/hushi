@@ -86,9 +86,9 @@ class bmob{
             $url   = $this->url . 'rank?where=' . $where;
 
             if(isset($data[$i])){
-                $info = ['num' => $data[$i]['integral'], 'name' => $data[$i]['name']];
+                $info = ['num' => (string)$data[$i]['integral'], 'name' => (string)$data[$i]['name']];
             }else{
-                $info = ['num' => 0, 'name' => ''];
+                $info = ['num' => '0', 'name' => ''];
             }
 
             $end = curlRequest($url, $info, $this->header, 1);
