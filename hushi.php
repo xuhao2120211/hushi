@@ -290,7 +290,7 @@ class hushi{
      * @return bool|int
      */
     public function getTop(){
-        if($this->last_rank_time + 305 < time()){
+        if($this->last_rank_time > 0 && $this->last_rank_time + 305 < time()){
             showStr('当前分数为' . $this->my_val . ',上次查询的最高分为' . $this->top_val);
             return false;
         }
