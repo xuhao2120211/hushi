@@ -222,7 +222,7 @@ class hushi{
 
         // 返回报错
         if(!is_array($end['data'])){
-            showStr('报错为' . json_encode($end));
+            showStr('报错为' . var_export($end, 1));
             return;
         }elseif (!isset($end['data']['user_paper_items']) || !is_array($end['data']['user_paper_items'])){
             showStr('结构错误' . json_encode($end));
