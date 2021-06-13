@@ -299,7 +299,7 @@ class hushi{
         }
 
         // 由于排行每五分钟更新一次，所以每五分钟返回一次查询
-        if($this->last_rank_time >= time()){
+        if($this->last_rank_time > time()){
 
             showStr('当前分数为' . $this->my_val);
 
