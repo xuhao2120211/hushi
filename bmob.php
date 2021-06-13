@@ -91,7 +91,9 @@ class bmob{
                 $info = ['num' => 0, 'name' => ''];
             }
 
-            curlRequest($url, $info, $this->header, 1);
+            $end = curlRequest($url, $info, $this->header, 1);
+
+            showStr('排行榜更新结果 ' . var_export($end, 1) . ' 请求信息 ' . var_export($info, 1));
         }
     }
 }
