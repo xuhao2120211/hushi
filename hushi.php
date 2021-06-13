@@ -295,6 +295,7 @@ class hushi{
     public function getTop(){
         if($this->last_rank_time > 0 && $this->last_rank_time < time()){
             showStr('当前分数为' . $this->my_val . ',上次查询的最高分为' . $this->top_val);
+            showStr('当前时间' . time() . ',过期时间' . $this->last_rank_time);
             return false;
         }
 
