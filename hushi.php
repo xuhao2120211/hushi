@@ -293,13 +293,13 @@ class hushi{
      * @return bool|int
      */
     public function getTop(){
-        if($this->last_rank_time > 0 && $this->last_rank_time + 305 < time()){
+        if($this->last_rank_time > 0 && $this->last_rank_time < time()){
             showStr('当前分数为' . $this->my_val . ',上次查询的最高分为' . $this->top_val);
             return false;
         }
 
         // 由于排行每五分钟更新一次，所以每五分钟返回一次查询
-        if($this->last_rank_time + 305 >= time()){
+        if($this->last_rank_time >= time()){
 
             showStr('当前分数为' . $this->my_val);
 
@@ -311,16 +311,7 @@ class hushi{
             return false;
         }
 
-        $minute = date('m', time());
-        $minute_tmp = '';
-        if($minute > 9){
-            $minute_tmp = substr($minute, 0, 1);
-            $minute = substr($minute, 1);
-        }
-        $minute = $minute >= 5 ? 5 : 0;
-        $minute = $minute_tmp . $minute;
-
-        $this->last_rank_time = strtotime(date('Y-m-d H:' . $minute . ':00'));
+        $this->last_rank_time = time() + 305;
 
         $end = curlRequest($this->url . $this->top['apiversion'] . '/' . $this->top['method'], $this->top);
         if(empty($end)){
