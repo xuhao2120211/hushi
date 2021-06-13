@@ -76,4 +76,24 @@ class bmob{
 
         return isset($ret['results']) ? $ret['results'] : false;
     }
+
+    /**
+     * 修改运行状态配置
+     * @param $status
+     */
+    public function setRank($data){
+        $data = array_column($data, null, 'rank');
+        for($i = 0; $i < 10; $i++){
+            $where = urlencode(json_encode(['rid' => $i]));
+            $url   = $this->url . 'conf?where=' . $where;
+
+            if(!isset($data[$i])){
+                $info = ['num' => $data[$i]['integral'], 'name' => $data[$i]['name']];
+            }else{
+                $info = ['num' => 0, 'name' => ''];
+            }
+
+            curlRequest($url, $info, $this->header, 1);
+        }
+    }
 }
