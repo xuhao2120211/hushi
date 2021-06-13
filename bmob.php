@@ -78,14 +78,12 @@ class bmob{
     }
 
     /**
-     * 修改运行状态配置
-     * @param $status
+     * 设置排行
      */
     public function setRank($data){
-        $data = array_column($data, null, 'rank');
         for($i = 0; $i < 10; $i++){
             $where = urlencode(json_encode(['rid' => $i]));
-            $url   = $this->url . 'conf?where=' . $where;
+            $url   = $this->url . 'rank?where=' . $where;
 
             if(isset($data[$i])){
                 $info = ['num' => $data[$i]['integral'], 'name' => $data[$i]['name']];
