@@ -82,7 +82,7 @@ class bmob{
      */
     public function setRank($data){
         for($i = 0; $i < 10; $i++){
-            $where = urlencode(json_encode(['rid' => $i]));
+            $where = urlencode(json_encode(['rid' => (string)$i]));
             $url   = $this->url . 'rank?where=' . $where;
 
             if(isset($data[$i])){
