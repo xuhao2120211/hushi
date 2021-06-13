@@ -330,7 +330,7 @@ class hushi{
 
         $data = $end['data']['list'];
 
-        showStr('当前分数为' . $end['data']['my_value'] . '，排名为' . $end['data']['my_rank']);
+        showStr('当前分数为' . $end['data']['my_value'] . '，排名为' . $end['data']['my_rank'] . '，过期时间是' . date('Y-m-d H:i:s', $this->last_rank_time));
 
         if (!is_array($data) || count($data) == 0){
             return false;
