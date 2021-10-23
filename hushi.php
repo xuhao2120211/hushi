@@ -64,13 +64,14 @@ class hushi{
         "paper_id"=> "",
         "sysVersion"=> "12.2",
         "deviceModel"=> "iPhone",
-        "codeVersion"=> "5.0.5",
+        "codeVersion"=> "5.3.1",
         "method"=> "hlzs/paper/fetch",
-        "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"=> "02e701c11d4b5dabc77a79cc4b386114",
         "apiversion"=> "1.0",
-        "sig"=> "e2a3087b541dae48ce82fead515c6d24",
-        "access_token"=> "7805863bd2409e45325fb258322a9bf6"
+        "sig"=> "e756cb3b65fd2755dc420fcc60f32f36",
+        "access_token"=> "7805863bd2409e45325fb258322a9bf6",
+        "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
+        "call_id"=> "d1f38f2bf30dd952ab009d4fa976c3f5",
+        "uniqueId" => "A9252581-DF37-49BB-830D-A7074DE83F36",
     ];
 
 
@@ -79,13 +80,14 @@ class hushi{
         "answer"        => [],
         "sysVersion"=> "12.2",
         "deviceModel"=> "iPhone",
-        "codeVersion"=> "5.0.5",
+        "codeVersion"=> "5.3.1",
         "method"=> "hlzs/paper/commit",
-        "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
-        "call_id"=> "7ca9947cbb27af00633b0e5734537f22",
         "apiversion"=> "1.0",
-        "sig"=> "33c0dc8091229d72c348af1e0fa7df71",
-        "access_token"=> "7805863bd2409e45325fb258322a9bf6"
+        "sig"=> "57026a34691d913854d51a9ef446292a",
+        "access_token"=> "7805863bd2409e45325fb258322a9bf6",
+        "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
+        "call_id"=> "ad1835f12a0e6f98cf1fa899d7e27363",
+        "uniqueId" => "A9252581-DF37-49BB-830D-A7074DE83F36",
     ];
 
 
@@ -95,40 +97,46 @@ class hushi{
         "order_type"=> "integral",
         "sysVersion"=> "12.2",
         "deviceModel"=> "iPhone",
-        "codeVersion"=> "5.1.1",
+        "codeVersion"=> "5.3.1",
         "method"=> "hlzs/integral/rank",
         "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
         "call_id"=> "1eb15ecac0e995fb8662966f20c0168b",
         "apiversion"=> "2.0",
-        "sig"=> "632988ae26cecb47f829406f363e7cc3",
-        "access_token"=> "7805863bd2409e45325fb258322a9bf6"
+        "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
+        "call_id"=> "6d5421ef6e2a9fad9ef4802af1088424",
+        "sig"=> "0e688761ea1b1df54b53f02e17d14d02",
+        "access_token"=> "7805863bd2409e45325fb258322a9bf6",
+        "uniqueId" => "A9252581-DF37-49BB-830D-A7074DE83F36",
     ];
 
     public $ios = [
         'arg' => [
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
-            "codeVersion"=> "5.1.1",
+            "codeVersion"=> "5.3.1",
+            "sig"=> "e756cb3b65fd2755dc420fcc60f32f36",
+            "access_token"=> "7805863bd2409e45325fb258322a9bf6",
             "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
-            "call_id"=> "02e701c11d4b5dabc77a79cc4b386114",
-            "sig"=> "e2a3087b541dae48ce82fead515c6d24",
+            "call_id"=> "d1f38f2bf30dd952ab009d4fa976c3f5",
 
         ],
         'ans' => [
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
-            "codeVersion"=> "5.1.1",
-            "call_id"=> "7ca9947cbb27af00633b0e5734537f22",
-            "sig"=> "33c0dc8091229d72c348af1e0fa7df71",
-            "access_token"=> "7805863bd2409e45325fb258322a9bf6"
+            "codeVersion"=> "5.3.1",
+            "sig"=> "57026a34691d913854d51a9ef446292a",
+            "access_token"=> "7805863bd2409e45325fb258322a9bf6",
+            "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
+            "call_id"=> "ad1835f12a0e6f98cf1fa899d7e27363",
         ],
         'top' => [
             "systemVersion" => "12.2",
             "deviceModel" => "iPhone",
-            "codeVersion"=> "5.1.1",
-            "call_id"=> "1eb15ecac0e995fb8662966f20c0168b",
-            "sig"=> "632988ae26cecb47f829406f363e7cc3",
-            "access_token"=> "7805863bd2409e45325fb258322a9bf6"
+            "codeVersion"=> "5.3.1",
+            "api_key"=> "f34b59ac9857e9bbf6a7d58a5e35996b",
+            "call_id"=> "6d5421ef6e2a9fad9ef4802af1088424",
+            "sig"=> "0e688761ea1b1df54b53f02e17d14d02",
+            "access_token"=> "7805863bd2409e45325fb258322a9bf6",
 
         ]
     ];
